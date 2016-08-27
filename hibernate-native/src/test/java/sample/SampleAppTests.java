@@ -19,6 +19,11 @@ public class SampleAppTests {
 	private ApplicationContext ctx;
 
 	@Test
+	public void contextLoads() {
+		assertThat(this.ctx.getBean(SampleApp.class)).isNotNull();
+	}
+
+	@Test
 	public void entityManagerCount() {
 		assertThat(this.ctx.getBeansOfType(EntityManagerFactory.class)).hasSize(1);
 	}
