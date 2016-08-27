@@ -17,7 +17,7 @@ public class SampleController {
 	}
 
 	@RequestMapping("/")
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<SampleEntity> home() {
 		return this.sessionFactory.getCurrentSession()
 				.createQuery("from SampleEntity se")
