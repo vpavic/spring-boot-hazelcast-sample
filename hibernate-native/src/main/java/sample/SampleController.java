@@ -2,9 +2,7 @@ package sample;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleController {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+	private SessionFactory sessionFactory;
+
+	public SampleController(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@RequestMapping("/")
 	@Transactional(readOnly = true)
 	public List<SampleEntity> home() {
-		return this.entityManager.createQuery(
-				"select se from SampleEntity se", SampleEntity.class)
-				.getResultList();
+		return this.sessionFactory.getCurrentSession()
+				.createQuery("from SampleEntity se")
+				.list();
 	}
 
 }
