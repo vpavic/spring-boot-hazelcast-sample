@@ -1,0 +1,8 @@
+ext['hibernate.version'] = '5.2.3.Final'
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework:spring-orm'
+	compile 'org.hibernate:hibernate-core'
+	compile 'com.h2database:h2'
+}
