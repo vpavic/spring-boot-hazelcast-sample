@@ -20,7 +20,7 @@ public class SampleController {
 	@Transactional(readOnly = true)
 	public List<SampleEntity> home() {
 		return this.sessionFactory.getCurrentSession()
-				.createQuery("from SampleEntity se")
+				.createQuery("select se from SampleEntity se", SampleEntity.class)
 				.list();
 	}
 
