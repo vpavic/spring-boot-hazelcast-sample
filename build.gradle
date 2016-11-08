@@ -1,20 +1,10 @@
-buildscript {
-	ext {
-		springBootVersion = '1.4.1.RELEASE'
-	}
-
-	repositories {
-		jcenter()
-	}
-
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
-	}
+plugins {
+	id 'org.springframework.boot' version '1.4.2.RELEASE' apply false
 }
 
 subprojects {
 	apply plugin: 'java'
-	apply plugin: 'spring-boot'
+	apply plugin: 'org.springframework.boot'
 
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'
