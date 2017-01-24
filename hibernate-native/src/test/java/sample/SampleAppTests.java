@@ -22,7 +22,7 @@ public class SampleAppTests {
 	}
 
 	@Test
-	public void entityManagerCount() {
+	public void sessionFactoryCount() {
 		assertThat(this.ctx.getBean(SessionFactory.class)).isNotNull();
 	}
 
