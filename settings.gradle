@@ -2,4 +2,5 @@ rootProject.name = 'spring-boot-samples'
 
 include 'hibernate-jpa'
 include 'hibernate-native'
+include 'session-hazelcast'
 include 'session-jdbc'
