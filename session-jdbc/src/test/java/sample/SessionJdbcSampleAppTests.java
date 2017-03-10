@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SampleAppTests {
+public class SessionJdbcSampleAppTests {
 
 	@Test
 	public void contextLoads() {
