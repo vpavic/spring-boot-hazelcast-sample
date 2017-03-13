@@ -1,3 +1,7 @@
+server:
+  session:
+    timeout: 1800
+
 spring:
   session:
     store-type: mongo
