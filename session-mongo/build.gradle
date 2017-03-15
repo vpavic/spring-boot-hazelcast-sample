@@ -3,5 +3,5 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.session:spring-session-data-mongo'
 
-	compile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+	testCompile 'org.testcontainers:testcontainers:1.2.0'
 }
