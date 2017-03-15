@@ -9,10 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.EnvironmentTestUtils;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = SessionWebSocketSampleApp.class)
+@ContextConfiguration(initializers = SessionWebSocketSampleAppTests.Initializer.class)
 public class SessionWebSocketSampleAppTests {
 
 	@ClassRule
