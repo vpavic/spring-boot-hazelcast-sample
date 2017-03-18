@@ -40,6 +40,7 @@
 			</thead>
 			<tbody id="replies"></tbody>
 		</table>
+		<div id="error" class="alert alert-danger hidden" role="alert"></div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -52,24 +53,29 @@
 
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, function() {
-			stompClient.subscribe('/topic/echo', function(echo) {
-				showEcho(JSON.parse(echo.body));
+			stompClient.subscribe('/topic/echo', function(message) {
+				var echo = JSON.parse(message.body);
+				$('#replies').prepend('<tr><td>' + echo.message + '</td><td>' + echo.sessionId +
+					'</td><td>' + echo.sessionCreationTime + '</td><td>' +
+					echo.sessionLastAccessedTime + '</td></tr>');
+			});
+			stompClient.subscribe('/topic/errors', function(message) {
+				var alert = $('#error');
+				alert.text(message.body);
+				alert.removeClass('hidden');
+				alert.fadeTo(2000, 500).slideUp(500, function() {
+					alert.slideUp(500);
+				});
 			});
 		});
 
 		input.focus();
 
 		$('#message-form').submit(function(event) {
-			stompClient.send('/app/messages', {}, JSON.stringify({ 'content': input.val() }));
+			stompClient.send('/app/messages', {}, input.val());
 			input.val('');
 			event.preventDefault();
 		});
-
-		function showEcho(echo) {
-			$('#replies').prepend('<tr><td>' + echo.content + '</td><td>' + echo.sessionId
-					+'</td><td>' + echo.sessionCreationTime + '</td><td>'
-					+ echo.sessionLastAccessedTime + '</td></tr>');
-		}
 	</script>
 </body>
 </html>

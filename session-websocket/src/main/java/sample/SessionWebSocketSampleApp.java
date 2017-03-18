@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -39,9 +40,19 @@ public class SessionWebSocketSampleApp {
 
 	@MessageMapping("/messages")
 	@SendTo("/topic/echo")
-	public Echo handle(Message message, @Header("simpSessionAttributes") Map<String, Object> attributes) {
+	public Echo echo(String message, @Header("simpSessionAttributes") Map<String, Object> attributes) {
 		String sessionId = (String) attributes.get("SPRING.SESSION.ID");
-		return new Echo(message, this.sessionRepository.getSession(sessionId));
+		ExpiringSession session = this.sessionRepository.getSession(sessionId);
+		if (session == null) {
+			throw new IllegalStateException("No session available");
+		}
+		return new Echo(message, session);
+	}
+
+	@MessageExceptionHandler
+	@SendTo("/topic/errors")
+	public String handleError(Exception e) {
+		return e.getMessage();
 	}
 
 	@Configuration
@@ -61,19 +72,9 @@ public class SessionWebSocketSampleApp {
 
 	}
 
-	static class Message {
-
-		private String content;
-
-		public String getContent() {
-			return this.content;
-		}
-
-	}
-
 	static class Echo {
 
-		private String content;
+		private String message;
 
 		private String sessionId;
 
@@ -81,17 +82,15 @@ public class SessionWebSocketSampleApp {
 
 		private Date sessionLastAccessedTime;
 
-		Echo(Message message, ExpiringSession session) {
-			this.content = message.getContent();
-			if (session != null) {
-				this.sessionId = session.getId();
-				this.sessionCreationTime = new Date(session.getCreationTime());
-				this.sessionLastAccessedTime = new Date(session.getLastAccessedTime());
-			}
+		Echo(String message, ExpiringSession session) {
+			this.message = message;
+			this.sessionId = session.getId();
+			this.sessionCreationTime = new Date(session.getCreationTime());
+			this.sessionLastAccessedTime = new Date(session.getLastAccessedTime());
 		}
 
-		public String getContent() {
-			return this.content;
+		public String getMessage() {
+			return this.message;
 		}
 
 		public String getSessionId() {
