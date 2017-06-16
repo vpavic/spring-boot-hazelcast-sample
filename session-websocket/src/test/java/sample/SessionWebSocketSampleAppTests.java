@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.testcontainers.containers.GenericContainer;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.EnvironmentTestUtils;
+import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,9 +31,8 @@ public class SessionWebSocketSampleAppTests {
 		public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
 			String host = redis.getContainerIpAddress();
 			Integer port = redis.getMappedPort(6379);
-			EnvironmentTestUtils.addEnvironment("testcontainers",
-					configurableApplicationContext.getEnvironment(),
-					"spring.redis.host=" + host, "spring.redis.port=" + port);
+			TestPropertyValues.of("spring.redis.host=" + host, "spring.redis.port=" + port)
+					.applyTo(configurableApplicationContext);
 		}
 
 	}
