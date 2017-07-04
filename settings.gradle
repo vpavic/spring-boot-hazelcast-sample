@@ -1,6 +1,5 @@
 rootProject.name = 'spring-boot-demos'
 
-include 'hibernate-jpa'
 include 'session-hazelcast'
 include 'session-jdbc'
 include 'session-websocket'
