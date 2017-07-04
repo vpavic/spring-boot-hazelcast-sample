@@ -1,7 +1,0 @@
-dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework:spring-orm'
-
-	compile 'com.h2database:h2'
-	compile 'org.hibernate:hibernate-core'
-}
