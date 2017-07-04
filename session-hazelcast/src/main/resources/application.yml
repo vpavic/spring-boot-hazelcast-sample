@@ -1,7 +1,0 @@
-spring:
-  session:
-    store-type: hazelcast
-
-security:
-  user:
-    password: password
