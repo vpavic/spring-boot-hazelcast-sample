@@ -1,4 +1,3 @@
 rootProject.name = 'spring-boot-demos'
 
-include 'session-jdbc'
 include 'session-websocket'
