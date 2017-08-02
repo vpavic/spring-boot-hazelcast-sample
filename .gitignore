@@ -1,32 +1,17 @@
-### Gradle
-.gradle
-build
-gradle-app.setting
+# Gradle
+.gradle/
+build/
 
-### Eclipse/STS
+# IntelliJ IDEA
+.idea/
+out/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+bin/
 .classpath
 .project
 .settings
 .springBeans
-bin
-
-### IDEA
-*.iml
-*.ipr
-*.iws
-.idea
-out
-
-### OS
-*~
-.directory
-.Trash-*
-
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN
-
-.DS_Store
-._*
-.Trashes
