@@ -1,5 +1,7 @@
 dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-data-redis'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-websocket'
 	compile 'org.springframework.session:spring-session-data-redis'
 

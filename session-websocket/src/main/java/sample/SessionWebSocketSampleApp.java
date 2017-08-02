@@ -1,6 +1,6 @@
 package sample;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +14,7 @@ import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.session.ExpiringSession;
+import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
 import org.springframework.session.web.socket.config.annotation.AbstractSessionWebSocketMessageBrokerConfigurer;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class SessionWebSocketSampleApp {
 
 	@Autowired
-	private SessionRepository<? extends ExpiringSession> sessionRepository;
+	private SessionRepository<? extends Session> sessionRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SessionWebSocketSampleApp.class, args);
@@ -42,7 +42,7 @@ public class SessionWebSocketSampleApp {
 	@SendTo("/topic/echo")
 	public Echo echo(String message, @Header("simpSessionAttributes") Map<String, Object> attributes) {
 		String sessionId = (String) attributes.get("SPRING.SESSION.ID");
-		ExpiringSession session = this.sessionRepository.getSession(sessionId);
+		Session session = this.sessionRepository.findById(sessionId);
 		if (session == null) {
 			throw new IllegalStateException("No session available");
 		}
@@ -57,7 +57,7 @@ public class SessionWebSocketSampleApp {
 
 	@Configuration
 	@EnableWebSocketMessageBroker
-	static class WebSocketConfig extends AbstractSessionWebSocketMessageBrokerConfigurer<ExpiringSession> {
+	static class WebSocketConfig extends AbstractSessionWebSocketMessageBrokerConfigurer<Session> {
 
 		@Override
 		protected void configureStompEndpoints(StompEndpointRegistry registry) {
@@ -78,15 +78,15 @@ public class SessionWebSocketSampleApp {
 
 		private String sessionId;
 
-		private Date sessionCreationTime;
+		private Instant sessionCreationTime;
 
-		private Date sessionLastAccessedTime;
+		private Instant sessionLastAccessedTime;
 
-		Echo(String message, ExpiringSession session) {
+		Echo(String message, Session session) {
 			this.message = message;
 			this.sessionId = session.getId();
-			this.sessionCreationTime = new Date(session.getCreationTime());
-			this.sessionLastAccessedTime = new Date(session.getLastAccessedTime());
+			this.sessionCreationTime = session.getCreationTime();
+			this.sessionLastAccessedTime = session.getLastAccessedTime();
 		}
 
 		public String getMessage() {
@@ -97,11 +97,11 @@ public class SessionWebSocketSampleApp {
 			return this.sessionId;
 		}
 
-		public Date getSessionCreationTime() {
+		public Instant getSessionCreationTime() {
 			return this.sessionCreationTime;
 		}
 
-		public Date getSessionLastAccessedTime() {
+		public Instant getSessionLastAccessedTime() {
 			return this.sessionLastAccessedTime;
 		}
 
