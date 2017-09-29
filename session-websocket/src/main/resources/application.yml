@@ -1,6 +1,3 @@
 spring:
-  session:
-    store-type: redis
-
   jackson:
     date-format: yyyy-MM-dd'T'HH:mm:ss

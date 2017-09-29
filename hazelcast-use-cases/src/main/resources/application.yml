@@ -2,9 +2,6 @@ spring:
   cache:
     type: hazelcast
 
-  session:
-    store-type: hazelcast
-
   jpa:
     open-in-view: false
     hibernate:
@@ -20,7 +17,3 @@ spring:
   h2:
     console:
       enabled: true
-
-security:
-  user:
-    password: password
