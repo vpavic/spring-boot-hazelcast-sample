@@ -1,7 +1,5 @@
 package demo;
 
-import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -49,13 +47,13 @@ public class HazelcastUseCasesApplication implements CommandLineRunner {
 
 		@Bean
 		public UserDetailsService userDetailsService() {
-			return new InMemoryUserDetailsManager(Collections.singletonList(
-					User.withUsername("user").password("password").roles("USER").build()));
+			return new InMemoryUserDetailsManager(User.withDefaultPasswordEncoder().username("user")
+					.password("password").roles("USER").build());
 		}
 
-		// @formatter:off
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
+			// @formatter:off
 			http
 				.authorizeRequests()
 					.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
@@ -63,8 +61,8 @@ public class HazelcastUseCasesApplication implements CommandLineRunner {
 					.and()
 				.formLogin()
 					.permitAll();
+			// @formatter:on
 		}
-		// @formatter:on
 
 	}
 
