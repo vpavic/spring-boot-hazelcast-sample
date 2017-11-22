@@ -4,10 +4,9 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 
-	compile 'org.springframework.session:spring-session-hazelcast'
-
-	compile 'com.hazelcast:hazelcast-spring'
 	compile 'com.hazelcast:hazelcast-hibernate52'
+	compile 'com.hazelcast:hazelcast-spring'
+	compile 'org.springframework.session:spring-session-hazelcast'
 
 	runtime 'com.h2database:h2'
 }
