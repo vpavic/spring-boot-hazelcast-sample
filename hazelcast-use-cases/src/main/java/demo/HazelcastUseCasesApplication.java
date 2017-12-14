@@ -31,7 +31,7 @@ public class HazelcastUseCasesApplication implements CommandLineRunner {
 
 	@Override
 	@Transactional
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		this.repository.save(new SampleEntity("sample1"));
 		this.repository.save(new SampleEntity("sample2"));
 		this.repository.save(new SampleEntity("sample3"));
