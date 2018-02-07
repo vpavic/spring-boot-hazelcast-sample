@@ -4,15 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.StaticResourceRequest;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,18 +41,12 @@ public class HazelcastUseCasesApplication implements CommandLineRunner {
 	@Configuration
 	static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-		@Bean
-		public UserDetailsService userDetailsService() {
-			return new InMemoryUserDetailsManager(User.withDefaultPasswordEncoder().username("user")
-					.password("password").roles("USER").build());
-		}
-
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			// @formatter:off
 			http
 				.authorizeRequests()
-					.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
+					.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 					.anyRequest().authenticated()
 					.and()
 				.formLogin()
