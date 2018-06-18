@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SessionWebSocketSampleAppTests {
 
 	@ClassRule
-	public static GenericContainer redis = new GenericContainer("redis:4.0.8")
+	public static GenericContainer redis = new GenericContainer("redis:4.0.9")
 			.withExposedPorts(6379);
 
 	@Test
