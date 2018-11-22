@@ -1,3 +1,3 @@
-# Spring Boot samples
+# Spring Boot Hazelcast Demo
 
-Sample Spring Boot projects used for demos and bug reports.
+Demo application to showcase Spring Boot's Hazelcast support.

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableCaching
 @RestController
-public class HazelcastUseCasesApplication implements CommandLineRunner {
+public class HazelcastDemoApplication implements CommandLineRunner {
 
 	@Autowired
 	private SampleEntityRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(HazelcastUseCasesApplication.class, args);
+		SpringApplication.run(HazelcastDemoApplication.class, args);
 	}
 
 	@Override
