@@ -44,7 +44,8 @@ class SecurityConfiguration {
 				.headers()
 					.frameOptions().sameOrigin()
 					.and()
-				.csrf().disable();
+				.csrf()
+					.disable();
 			// @formatter:on
 		}
 

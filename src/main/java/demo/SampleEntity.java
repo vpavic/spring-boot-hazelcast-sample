@@ -17,6 +17,10 @@ public class SampleEntity {
 
 	private String name;
 
+	SampleEntity() {
+		// for Hibernate
+	}
+
 	public SampleEntity(String name) {
 		this.name = name;
 	}
@@ -27,10 +31,6 @@ public class SampleEntity {
 
 	public String getName() {
 		return this.name;
-	}
-
-	private SampleEntity() {
-		// for Hibernate
 	}
 
 }

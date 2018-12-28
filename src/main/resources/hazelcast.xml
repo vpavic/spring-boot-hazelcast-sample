@@ -25,4 +25,25 @@
 		</indexes>
 	</map>
 
+	<cache name="default-query-results-region">
+		<eviction size="10"/>
+		<expiry-policy-factory>
+			<timed-expiry-policy-factory expiry-policy-type="ACCESSED" duration-amount="1" time-unit="MINUTES"/>
+		</expiry-policy-factory>
+	</cache>
+
+	<cache name="default-update-timestamps-region">
+		<eviction size="10"/>
+		<expiry-policy-factory>
+			<timed-expiry-policy-factory expiry-policy-type="ACCESSED" duration-amount="1" time-unit="MINUTES"/>
+		</expiry-policy-factory>
+	</cache>
+
+	<cache name="demo.SampleEntity">
+		<eviction size="10"/>
+		<expiry-policy-factory>
+			<timed-expiry-policy-factory expiry-policy-type="ACCESSED" duration-amount="1" time-unit="MINUTES"/>
+		</expiry-policy-factory>
+	</cache>
+
 </hazelcast>

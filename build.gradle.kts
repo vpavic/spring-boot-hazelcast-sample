@@ -12,7 +12,16 @@ repositories {
 	mavenCentral()
 }
 
+val developmentOnly: Configuration by configurations.creating
+
+configurations {
+	runtimeClasspath {
+		extendsFrom(configurations["developmentOnly"])
+	}
+}
+
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
@@ -23,7 +32,8 @@ dependencies {
 	implementation("org.springframework.session:spring-session-hazelcast")
 
 	runtimeOnly("com.h2database:h2")
-	runtimeOnly("org.springframework.boot:spring-boot-devtools")
+
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
