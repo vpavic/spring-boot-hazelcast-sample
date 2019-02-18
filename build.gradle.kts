@@ -1,7 +1,8 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
 	java
-	id("io.spring.dependency-management") version "1.0.6.RELEASE"
-	id("org.springframework.boot") version "2.1.2.RELEASE"
+	id("org.springframework.boot") version "2.1.3.RELEASE"
 }
 
 java {
@@ -21,6 +22,8 @@ configurations {
 }
 
 dependencies {
+	implementation(platform(SpringBootPlugin.BOM_COORDINATES))
+
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
