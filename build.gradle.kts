@@ -13,14 +13,6 @@ repositories {
 	mavenCentral()
 }
 
-val developmentOnly: Configuration by configurations.creating
-
-configurations {
-	runtimeClasspath {
-		extendsFrom(configurations["developmentOnly"])
-	}
-}
-
 dependencies {
 	implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
@@ -35,8 +27,6 @@ dependencies {
 	implementation("org.springframework.session:spring-session-hazelcast")
 
 	runtimeOnly("com.h2database:h2")
-
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
