@@ -2,11 +2,11 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
 	java
-	id("org.springframework.boot") version "2.1.3.RELEASE"
+	id("org.springframework.boot") version "2.2.6.RELEASE"
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_1_8
+	sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
