@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -30,6 +31,11 @@ public class HazelcastDemoApplication implements CommandLineRunner {
 	@GetMapping(path = "/")
 	public Iterable<SampleEntity> home() {
 		return this.repository.findAll();
+	}
+
+	@GetMapping(path = "/{id}")
+	public SampleEntity entity(@PathVariable Long id) {
+		return this.repository.findById(id).orElse(null);
 	}
 
 }
