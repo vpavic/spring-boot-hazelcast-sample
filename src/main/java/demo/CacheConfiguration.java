@@ -7,12 +7,12 @@ import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableCaching
-public class CacheConfiguration {
+class CacheConfiguration {
 
 	@Bean
-	public HibernatePropertiesCustomizer hibernateSecondLevelCacheCustomizer(JCacheCacheManager cacheManager) {
+	HibernatePropertiesCustomizer hibernateSecondLevelCacheCustomizer(JCacheCacheManager cacheManager) {
 		return properties -> properties.put(ConfigSettings.CACHE_MANAGER, cacheManager.getCacheManager());
 	}
 
