@@ -29,12 +29,12 @@ public class HazelcastDemoApplication implements CommandLineRunner {
 	}
 
 	@GetMapping(path = "/")
-	public Iterable<SampleEntity> home() {
+	Iterable<SampleEntity> home() {
 		return this.repository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public SampleEntity entity(@PathVariable Long id) {
+	SampleEntity entity(@PathVariable Long id) {
 		return this.repository.findById(id).orElse(null);
 	}
 

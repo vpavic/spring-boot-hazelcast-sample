@@ -17,8 +17,7 @@ public class SampleEntity {
 
 	private String name;
 
-	SampleEntity() {
-		// for Hibernate
+	protected SampleEntity() {
 	}
 
 	public SampleEntity(String name) {
