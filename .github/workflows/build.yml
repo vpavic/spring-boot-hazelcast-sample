@@ -13,6 +13,12 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: 11
+
       - uses: actions/cache@v2
         with:
           path: |
@@ -21,12 +27,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-
-      - name: Configure JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: zulu
-          java-version: 11
 
       - name: Run Build
         run: ./gradlew check --stacktrace
