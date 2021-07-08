@@ -19,7 +19,8 @@ jobs:
           distribution: zulu
           java-version: 11
 
-      - uses: actions/cache@v2
+      - name: Cache Gradle Packages
+        uses: actions/cache@v2
         with:
           path: |
             ~/.gradle/caches
