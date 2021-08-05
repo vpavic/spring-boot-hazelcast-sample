@@ -2,7 +2,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
 	id("java")
-	id("org.springframework.boot").version("2.5.3")
+	id("org.springframework.boot").version("2.6.0-M1")
 }
 
 java {
@@ -13,6 +13,7 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url = "https://repo.spring.io/milestone/" }
 }
 
 dependencies {
