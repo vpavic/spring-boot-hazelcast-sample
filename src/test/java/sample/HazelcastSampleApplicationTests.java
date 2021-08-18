@@ -1,4 +1,4 @@
-package demo;
+package sample;
 
 import javax.cache.CacheManager;
 
@@ -13,7 +13,7 @@ import org.springframework.session.hazelcast.Hazelcast4IndexedSessionRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class HazelcastDemoApplicationTests {
+class HazelcastSampleApplicationTests {
 
 	@Test
 	void contextLoads(ApplicationContext context) {

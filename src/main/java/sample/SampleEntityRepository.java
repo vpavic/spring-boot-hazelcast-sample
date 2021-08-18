@@ -1,4 +1,4 @@
-package demo;
+package sample;
 
 import java.util.List;
 import javax.persistence.QueryHint;

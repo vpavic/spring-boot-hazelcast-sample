@@ -1,4 +1,4 @@
-package demo;
+package sample;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,13 +13,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 @SpringBootApplication
 @RestController
-public class HazelcastDemoApplication implements CommandLineRunner {
+public class HazelcastSampleApplication implements CommandLineRunner {
 
 	@Autowired
 	private SampleEntityRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(HazelcastDemoApplication.class, args);
+		SpringApplication.run(HazelcastSampleApplication.class, args);
 	}
 
 	@Override

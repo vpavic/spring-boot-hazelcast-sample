@@ -1,3 +1,3 @@
-# Spring Boot Hazelcast Demo
+# Spring Boot Hazelcast Sample
 
-Demo application to showcase Spring Boot's Hazelcast support.
+Sample application to showcase Spring Boot's Hazelcast support.
